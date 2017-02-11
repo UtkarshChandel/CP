@@ -7,7 +7,7 @@ const {User} = require('./models/user');
 const hbs = require('hbs');
 const jQuery = require('jquery');
 const app = express();
-const sendgrid = require('sendgrid')("Utkarshchandel","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");
+const port = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: false }))
 var helper = require('sendgrid').mail;
 
@@ -70,6 +70,6 @@ app.get('/mail',(req,res)=>{
 
 
 
-app.listen(3000,()=>{
-  console.log("UP on 3000!!!");
+app.listen(port,()=>{
+  console.log(`UP on ${port}!!!`);
 });
