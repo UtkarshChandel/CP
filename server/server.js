@@ -1,15 +1,21 @@
 const _ = require('lodash');
 const express = require('express');
 const bodyParser = require('body-parser');
-const {ObjectID} = require('mongodb');
+
 const {mongoose} = require('./db/mongoose');
 const {User} = require('./models/user');
 const hbs = require('hbs');
 const jQuery = require('jquery');
 const app = express();
 const port = process.env.PORT || 3000;
+var dotenv = require('dotenv');
+
+dotenv.load();
+//====
 app.use(bodyParser.urlencoded({ extended: false }))
 var helper = require('sendgrid').mail;
+var sendgrid = require('sendgrid')('Utkarshchandel',process.env.SENDGRID_API_KEY);
+//====
 
 // parse application/json
 app.use(bodyParser.json())
@@ -25,14 +31,14 @@ app.post('/',(req,res)=>{
   console.log(rcvdJson);
   var user = new User(rcvdJson);
 
-  user.save().then(()=>{
+
     from_email = new helper.Email("support@ProjectCentralpoint.com");
     to_email = new helper.Email(rcvdJson.email);
     subject = "Verify Your Account CentralPoint";
     content = new helper.Content("text/plain", "Please enter this activation code on the verification box");
     mail = new helper.Mail(from_email, subject, to_email, content);
 
-    var sg = require('sendgrid')('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');
+    var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
     var request = sg.emptyRequest({
       method: 'POST',
       path: '/v3/mail/send',
@@ -40,26 +46,19 @@ app.post('/',(req,res)=>{
     });
 
     sg.API(request, function(error, response) {
-      
+
       console.log(response.statusCode);
       console.log(response.body);
       console.log(response.header);
     });
+    user.save().then(()=>{
     res.status(200).render('home.hbs',{
       userName : rcvdJson.name
     });
 
   }).catch((e)=>{
-    res.status(400).send(e);
+    res.render('four.hbs').status(400).send();
   })
-
-
-});
-
-app.get('/mail',(req,res)=>{
-  // using SendGrid's v3 Node.js Library
-// https://github.com/sendgrid/sendgrid-nodejs
-
 
 
 });

@@ -5,6 +5,10 @@ jQuery.validator.addMethod("myFunc", function(val) {
     return false;
   }, "Currently Available for CM only #Burn");
 
+  jQuery.validator.addMethod("domain", function(value, element) {
+    return this.optional(element) || /^http:\/\/mycorporatedomain.com/.test(value);
+  }, "Please specify the correct domain for your documents");
+
 $().ready(function() {
   $("#message-form").validate({
     rules : {
@@ -16,6 +20,7 @@ $().ready(function() {
 
           required : true,
           email : true
+
       },
       password : {
         required : true,

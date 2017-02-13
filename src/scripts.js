@@ -1,5 +1,5 @@
 var $ = require('jquery');
-var jv = require('jquery-validation');
+
 
 $('message-form').submit((e)=>{
 var userEmail = $('#email').val();
@@ -8,7 +8,7 @@ var userPassword = $('#password').val();
 var userCourse = $('#course').val();
 var userYear = $('#year').val();
 var userRollno = $('#rollno').val();
-  event.preventDefault();
+  e.preventDefault();
   console.log("Event called");
 
 
