@@ -1,12 +1,16 @@
 const _ = require('lodash');
 const express = require('express');
 const bodyParser = require('body-parser');
+const http = require('http');
+const socketIO = require('socket.io');
 
 const {mongoose} = require('./db/mongoose');
 const {User} = require('./models/user');
 const hbs = require('hbs');
 const jQuery = require('jquery');
-const app = express();
+var app = express();
+var server = http.createServer(app);
+var io = socketIO(server);
 const port = process.env.PORT || 3000;
 var dotenv = require('dotenv');
 
@@ -22,6 +26,13 @@ app.use(bodyParser.json())
 //My Middleware
 app.use(express.static(__dirname +'./../public'));
 app.set('view engine',hbs);
+
+io.on('connection',(socket)=>{
+  console.log('New user connected');
+});
+
+
+
 //Router
 app.get('/',(req,res)=>{
 
@@ -69,6 +80,6 @@ app.post('/',(req,res)=>{
 
 
 
-app.listen(port,()=>{
+server.listen(port,()=>{
   console.log(`UP on ${port}!!!`);
 });
