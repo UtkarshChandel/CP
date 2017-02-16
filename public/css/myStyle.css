@@ -1,0 +1,17 @@
+.try {
+  color: pink;
+
+}
+#try {
+  color: pink;
+}
+
+
+#rcorners1 {
+
+    border-radius: 8px;
+    background: #73AD21;
+    padding: 2px;
+    width: 150px;
+    height: 15px;
+}

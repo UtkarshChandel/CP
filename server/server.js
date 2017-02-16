@@ -13,8 +13,13 @@ var server = http.createServer(app);
 var io = socketIO(server);
 const port = process.env.PORT || 3000;
 var dotenv = require('dotenv');
-
 dotenv.load();
+
+var sync = require('synchronize');
+var fiber = sync.fiber;
+var await = sync.await;
+var defer = sync.defer;
+
 //====
 app.use(bodyParser.urlencoded({ extended: false }))
 var helper = require('sendgrid').mail;
@@ -32,7 +37,7 @@ io.on('connection',(socket)=>{
 });
 
 
-
+var checkSuc = true;
 //Router
 app.get('/',(req,res)=>{
 
@@ -41,38 +46,86 @@ app.post('/',(req,res)=>{
   var rcvdJson = req.body;
   console.log(rcvdJson);
   var user = new User(rcvdJson);
+  mmail();
 
 
-    from_email = new helper.Email("support@ProjectCentralpoint.com");
+
+  function mmail(){
+
+    from_email = new helper.Email("CentralPoint@ProjectCentralpoint.com");
     to_email = new helper.Email(rcvdJson.email);
-    subject = "Verify Your Account CentralPoint";
+    subject = "Verify Your Account";
     content = new helper.Content("text/plain", "Please enter this activation code on the verification box");
     mail = new helper.Mail(from_email, subject, to_email, content);
 
-    var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
-    var request = sg.emptyRequest({
+    var sg = require('sendgrid')(process.env.SENDGdRID_API_KEY);
+      var request = sg.emptyRequest({
       method: 'POST',
       path: '/v3/mail/send',
       body: mail.toJSON()
     });
 
-    sg.API(request, function(error, response) {
 
-      console.log(response.statusCode);
-      console.log(response.body);
-      console.log(response.header);
+    sg.API(request).then((request)=>{
+        console.log(response.statusCode);
+
+        console.log(response.body);
+        console.log(response.header);
+        console.log("here in response");
+        if(response.statusCode != 201){
+          checkSuc = false;
+          console.log('in if');
+          console.log(checkSuc);
+        }
+      }).catch((error)=>{
+        console.log(error.message);
+        console.log('error occured');
+      });
+
+
+
+  }
+
+  var ifItWorks = new Promise(
+    function (resolve,reject){
+      if(checkSuc){
+        resolve(checkSuc);
+        console.log('resolved');
+      }else {
+        var reason = new Error('mail not sent');
+        reject(reason);
+      }
+    }
+  );
+
+
+ function consume(){
+   setTimeout(function(){
+    ifItWorks
+    .then(()=>{
+      console.log(checkSuc);
+      user.save();
+      console.log('saved doc.');
+      res.status(200).render('home.hbs',{
+        userName : rcvdJson.name
+      })
+
+    })
+    .catch((error)=>{
+
+      console.log(error.message);
+      res.render('four.hbs').status(400).send();
     });
-    user.save().then(()=>{
-    res.status(200).render('home.hbs',{
-      userName : rcvdJson.name
-    });
+  },1000);
+};
 
-  }).catch((e)=>{
-    res.render('four.hbs').status(400).send();
-  })
-
-
+consume();
 });
+
+
+app.post('/login',(req,res)=>{
+
+})
 
 
 

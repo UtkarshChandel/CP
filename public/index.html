@@ -2,30 +2,40 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Project-CentralPoint</title>
+    <!-- Behavioral Meta Data -->
+   <meta name="apple-mobile-web-app-capable" content="yes">
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+
   </head>
+  <link rel="stylesheet" href="/css/myStyle.css">
+  <link rel="stylesheet" href="/css/style.css">
   <body>
-    <p>Welecom to attempt 3 of trying to make a cool Interface</p>
+    <div id="particles-js">
+      <p>Welecom to attempt 3 of trying to make a cool Interface</p>
 
-      <form id="message-form" method="POST">
+        <form id="message-form" method="POST" class="try">
 
-        <p>
-            <label for="name">Name</label>
-            <input id="name" name="name" type="text">
+          <p>
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text">
 
-        </p>
+          </p>
 
-          <input name = "email" type="email" placeholder="Email"/>
-          <input name = "password" type="password" placeholder="Password"/>
-          <input name = "course" type="text" placeholder="Course"/>
-          <input name = "year" type="number" min="2016" max="2017" placeholder="Year"/>
-          <input name = "rollno" type="number" min="1" max="79" placeholder="Rollno."/>
+            <input name = "email" type="email" placeholder="Email" id="rcorners1"/>
+            <input name = "password" type="password" placeholder="Password" id="try"/>
+            <input name = "course" type="text" placeholder="Course"/>
+            <input name = "year" type="number" min="2016" max="2017" placeholder="Year"/>
+            <input name = "rollno" type="number" min="1" max="79" placeholder="Rollno."/>
 
 
 
-          <button type="submit">Send</button>
-      </form>
-
+            <button type="submit">Send</button>
+        </form>
+</div>
+    <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="js/index.js"></script>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/libs/jquery-3.1.0.min.js"></script>
