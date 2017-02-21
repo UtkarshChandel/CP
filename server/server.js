@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const http = require('http');
 const socketIO = require('socket.io');
+const firebase = require('firebase');
 
 const {mongoose} = require('./db/mongoose');
 const {User} = require('./models/user');
@@ -19,14 +20,19 @@ dotenv.load();
 //====
 app.use(bodyParser.urlencoded({ extended: false }))
 var helper = require('sendgrid').mail;
-var sendgrid = require('sendgrid')('Utkarshchandel',process.env.SENDGRID_API_KEY);
-//====
+
+//============================================================================//
 
 // parse application/json
 app.use(bodyParser.json())
 //My Middleware
 app.use(express.static(__dirname +'./../public'));
 app.set('view engine',hbs);
+//===========================================================================//
+app.post('/',(req,res)=>{
+
+
+})
 
 io.on('connection',(socket)=>{
   console.log('New user connected');

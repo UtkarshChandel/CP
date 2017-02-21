@@ -9,19 +9,177 @@
 
 
 <!--Style-Sheets-->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/myStyle.css">
 <!--  <link rel="stylesheet" href="/css/style.css"> --><!--Later-->
-
+    <script defer src="/js/material.min.js"></script>
     </head>
+    <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+              <script>
+          // Initialize Firebase
+                    var config = {
+                    apiKey: "AIzaSyDWbOM-S0cUTsd2-BIMZ4gMb1emqm5Pf88",
+                    authDomain: "project-cp-def29.firebaseapp.com",
+                    databaseURL: "https://project-cp-def29.firebaseio.com",
+                    storageBucket: "project-cp-def29.appspot.com",
+                    messagingSenderId: "651436094861"
+                    };
+          firebase.initializeApp(config);
+          </script>
+
+<script type="text/javascript">
+//==Major firebase wiring==
+
+// Click event                                              ====SIGNIN====
+function toggleSignIn() {
+  if(firebase.auth().currentUser) {
+          //If already signed in ..SignOut the user
+        firebase.auth().signOut();
+        //End
+
+  }else{    //Basic chck length
+            var email = document.getElementById('inputEmail').value;
+            var password = document.getElementById('inputPassword').value;
+                  if(email.length < 4)
+                  {
+                        alert('Please enter an email address');
+                        return;
+                  }
+                  if(password.length < 8)
+                         {
+                          alert('Please Enter Password with min 8 chars');
+                          return;
+                         }
+                      //Continuing with sigin
+                      firebase.auth().signInWithEmailAndPassword(email,password).catch(function(error){
+                        //Handling Errors
+                          var errorCode = error.code;
+                          var errorMessage = error.message;
+                        //Defining Errors to Users
+                          if(errorCode === 'auth/wrong-password'){
+                                alert("Wrong Password");
+                              } else{
+                                alert(errorMessage);
+                              }
+                                console.log(error);
+
+
+                      });
+        }//End of signin
+
+
+}//toggle button END
+
+            function handleSignUp() {
+              console.log("SignUP was called");
+              var email = document.getElementById('inputEmail').value;
+
+              var password = document.getElementById('inputPassword').value;
+                if(email.length < 4){
+                    alert("Enter valid email");
+                    return;
+                }
+                if(password.length < 8){
+                  alert("Enter a valid password");
+                  return;
+                }
+
+                firebase.auth().createUserWithEmailAndPassword(email,password).catch(function(error){
+                      var errorCode = error.code;
+                      var errorMessage = error.message;
+                        //Error def.
+                          if(errorCode == 'auth/weak-password')
+                          {
+                              alert('The password is too weak');
+                          }else{
+                            alert(errorMessage);
+                          }
+                            console.log(error);
+
+                  //Sending Email Verification and Password Reset//
+                }).then(function sendEmailVerification(){
+
+                      firebase.auth().currentUser.sendEmailVerification().then(function(){
+                            console.log("veri sent");
+                            alert('Email verification Sent!!!');
+                      });
+                    });
+
+                }//handleSignin END
+
+                  function sendPasswordReset(){
+                      var email = document.getElementById('inputEmail').value;
+
+                      firebase.auth().sendPasswordResetEmail(email).then(function (){
+                          alert('Password Reset Email sent!!');
+                      }).catch(function (error){
+                          var errorCode = error.code;
+                          var errorMessage = error.message;
+
+                            if(errorCode == 'auth/invalid-email')
+                            {
+                                alert(errorMessage);
+                            }else if (errorCode == 'auth/user-not-found'){
+                                alert(errorMessage);
+                            }
+                              console.log(error);
+                      });
+
+                  }
+
+                    function initApp(){
+                      //Listener for state change log in/out
+                        firebase.auth().onAuthStateChanged(function(user) {
+                          if (user) {
+                            console.log("Signed in");
+                              // User is signed in.
+                              var displayName = user.displayName;
+                              var email = user.email;
+                              console.log(user.email);
+                              var emailVerified = user.emailVerified;
+                              console.log(emailVerified);
+                              var photoURL = user.photoURL;
+                              var isAnonymous = user.isAnonymous;
+                              var uid = user.uid;
+                              var providerData = user.providerData;
+                              // [START_EXCLUDE silent]
+
+
+
+       // [END_EXCLUDE]
+     }else {
+       console.log("NO USER");
+     }
+                            });
+
+
+
+document.getElementById('signupBTN').addEventListener('click', handleSignUp, false);
+document.getElementById('signoutBTN').addEventListener('click',toggleSignIn,false);
+}
+window.onload = function() {
+      initApp();
+    };
+</script>
+
+
+
+
+
+
+
+
 
   <body>
 
       <div class="container" id="particles-js">
 
-    <form class="form-signin">
+    <form class="form-signin" method="POST">
           <h2 class="form-signin-heading">Project CentralPoint</h2>
+          <p>User : <code>currentUser</code></p>
           <label for="inputEmail" class="sr-only">Email address</label>
           <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
           <label for="inputPassword" class="sr-only">Password</label>
@@ -31,9 +189,15 @@
              <input type="checkbox" value="remember-me"> Remember me
           </label>
           </div>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit" id="signupBTN">Sign up</button>
+            <!-- Accent-colored raised button with ripple -->
+            <br>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="signoutBTN">
+                                      Sign Out
+                                     </button>
     </form>
+
 
   </div> <!-- /container -->
 
@@ -41,13 +205,17 @@
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="js/index.js"></script>
-
-    <script src="/socket.io/socket.io.js"></script>
     <script src="js/libs/jquery-3.1.0.min.js"></script>
     <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+
     <script src="js/bootstrap.min.js"></script>
+
+    <script src="/socket.io/socket.io.js"></script>
+
+<!--Before the Major workout==will be used later for validation==
     <script src="js/libs/jquery.validate.js"></script>
-    <script src="js/signup.js"></script>
+    <script src="js/signup.js"></script
+    -->
     <script src="js/build.js"></script>
     <script>
       var socket = io();
