@@ -29,10 +29,10 @@ app.use(bodyParser.json())
 app.use(express.static(__dirname +'./../public'));
 app.set('view engine',hbs);
 //===========================================================================//
-app.post('/',(req,res)=>{
+app.get('/utk',(req,res)=>{
+    res.render('home.hbs');
 
-
-})
+});
 
 io.on('connection',(socket)=>{
   console.log('New user connected');
