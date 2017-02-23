@@ -33,18 +33,18 @@
 <script type="text/javascript">
 //==Major firebase wiring==
 
-function postwo(path, params, method) {
-    method = method || "post";
-
-    var form = document.createElement("form");
-    form.setAttribute("method", method);
-    form.setAttribute("action", path);
-
-
-
-    document.body.appendChild(form);
-    form.submit();
-}
+// function postwo(path, params, method) {
+//     method = method || "post";
+//
+//     var form = document.createElement("form");
+//     form.setAttribute("method", method);
+//     form.setAttribute("action", path);
+//
+//
+//
+//     document.body.appendChild(form);
+//     form.submit();
+// }
 
 // Click event                                              ====SIGNIN====
 function post(path, params, method) {
@@ -109,7 +109,6 @@ function toggleSignIn() {
                               //postwo('/profile',data)
                               post('/profile', {
                                 email: firebase.auth().currentUser.email,
-                                karan : 'Arjun',
                                 token : JSON.stringify(data)
 
                               });
@@ -128,6 +127,7 @@ function toggleSignIn() {
                                 alert("Wrong Password");
                               } else{
                                 alert(errorMessage);
+                                console.log(errorMessage);
                               }
                                 console.log(error);
 
@@ -227,7 +227,7 @@ function toggleSignIn() {
        // [END_EXCLUDE]
      }else {
        console.log("NO USER");
-       
+
        document.getElementById('signoutBTN').value='Sign In';
      }
 });

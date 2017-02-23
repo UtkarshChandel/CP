@@ -52,20 +52,28 @@ app.set('view engine',hbs);
 //===========================================================================//
 
 app.post('/profile',(req,res)=>{
-  console.log(req.body.token);
+
   var accessToken = req.body.token
 
   var ak = JSON.parse(accessToken);
-  console.log('ttookkeen');
-  console.log(ak.accessToken);
+  // console.log('ttookkeen');
+  // console.log(ak.accessToken);
 
   admin.auth().verifyIdToken(ak.accessToken)
     .then(function(decodedToken) {
       var uid = decodedToken.uid;
       var mailid = decodedToken.email;
       var isVerified = decodedToken.email_verified;
-      console.log("Success");
-      res.render('profile.hbs');
+      global.c = mailid;
+
+      if(isVerified){
+        console.log("Success");
+        res.render('profile.hbs');
+      }
+      else {
+        res.status(400).render('four.hbs');
+      }
+
       // ...
     }).catch(function(error) {
       res.render('four.hbs');
@@ -76,7 +84,7 @@ app.post('/profile',(req,res)=>{
     });
 
 
-    
+
 
 
 
