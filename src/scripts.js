@@ -1,9 +1,8 @@
 // var $ = require('jquery');
 //
 // //Button event//
-// sN.addEventListener('click',e =>{
+// .addEventListener('click',e =>{
 //
-// });
 //
 //
 //   $.ajax({

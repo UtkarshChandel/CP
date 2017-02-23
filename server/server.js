@@ -19,7 +19,7 @@ dotenv.load();
 
 //====
 app.use(bodyParser.urlencoded({ extended: false }))
-var helper = require('sendgrid').mail;
+
 
 //============================================================================//
 
@@ -29,13 +29,21 @@ app.use(bodyParser.json())
 app.use(express.static(__dirname +'./../public'));
 app.set('view engine',hbs);
 //===========================================================================//
-app.get('/utk',(req,res)=>{
-    res.render('home.hbs');
+
+app.post('/utk',(req,res)=>{
+    console.log(req.body);
+    global.c = req.body.email;
+    res.render('profile.hbs');
 
 });
 
 io.on('connection',(socket)=>{
-  console.log('New user connected');
+  if (!global.c) {
+
+    global.c = "No User";
+
+  }
+  console.log(`${global.c}  connected`);
 });
 
 

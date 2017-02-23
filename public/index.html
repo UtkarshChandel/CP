@@ -34,6 +34,30 @@
 //==Major firebase wiring==
 
 // Click event                                              ====SIGNIN====
+function post(path, params, method) {
+    method = method || "post";
+
+    var form = document.createElement("form");
+    form.setAttribute("method", method);
+    form.setAttribute("action", path);
+
+    for(var key in params) {
+        if(params.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", params[key]);
+
+            form.appendChild(hiddenField);
+         }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+}
+
+
+
 function toggleSignIn() {
   if(firebase.auth().currentUser) {
           //If already signed in ..SignOut the user
@@ -56,8 +80,16 @@ function toggleSignIn() {
                          }
                       //Continuing with sigin
                       firebase.auth().signInWithEmailAndPassword(email,password).then(function (val){
+                            $('#signoutBTN').hide();
+                            $('#loader').show();
+                            setTimeout(function(){
+                              post('/utk', {
+                                email: firebase.auth().currentUser.email,
+                                karan : 'Arjun'
+                                      });
+                            },1300);
 
-                            window.location = "/utk";
+                            //window.location = "/utk";
 
                       },function(error){
                         //Handling Errors
@@ -167,7 +199,7 @@ function toggleSignIn() {
        console.log("NO USER");
        document.getElementById('signoutBTN').value='Sign In';
      }
-                            });
+});
 
 
 
@@ -176,6 +208,7 @@ document.getElementById('signoutBTN').addEventListener('click',toggleSignIn,fals
 }
 window.onload = function() {
       initApp();
+      $('#loader').hide();
     };
 </script>
 
@@ -207,7 +240,9 @@ window.onload = function() {
             <button class="btn btn-lg btn-primary btn-block" type="button" id="signupBTN">Sign up</button>
             <!-- Accent-colored raised button with ripple -->
             <br>
-            <input type="button" value="" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="signoutBTN" />
+            <input type="button"  value="" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="signoutBTN" />
+            <!-- MDL Spinner Component -->
+             <div class="mdl-spinner mdl-js-spinner is-active" id="loader"></div>
 
 
     </form>

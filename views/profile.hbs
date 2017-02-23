@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Project-CentralPoint</title>
+    <!-- Behavioral Meta Data -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,shrink-to-fit=no , user-scalable=no">
+
+
+<!--Style-Sheets-->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/myStyle.css">
+<!--  <link rel="stylesheet" href="/css/style.css"> --><!--Later-->
+    <script defer src="/js/material.min.js"></script>
+    </head>
+    <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+              <script>
+
+          // Initialize Firebase
+                    var config = {
+                    apiKey: "AIzaSyDWbOM-S0cUTsd2-BIMZ4gMb1emqm5Pf88",
+                    authDomain: "project-cp-def29.firebaseapp.com",
+                    databaseURL: "https://project-cp-def29.firebaseio.com",
+                    storageBucket: "project-cp-def29.appspot.com",
+                    messagingSenderId: "651436094861"
+                    };
+          firebase.initializeApp(config);
+          </script>
+
+
+          <body>
+
+              <div class="container" id="particles-js">
+
+            <form class="form-signin" method="POST">
+                  <h2 class="form-signin-heading">Setup Your Profile</h2>
+                  <p id="labeluser"></p>
+                  <label for="inputEmail" class="sr-only">Email address</label>
+                  <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                  <label for="inputPassword" class="sr-only">Password</label>
+                  <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                  <div class="checkbox">
+                  <label>
+                     <input type="checkbox" value="remember-me"> Remember me
+                  </label>
+                  </div>
+
+                    <button class="btn btn-lg btn-primary btn-block" type="button" id="signupBTN">Sign up</button>
+                    <!-- Accent-colored raised button with ripple -->
+                    <br>
+                    <input type="button" value="" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="signoutBTN" />
+                    
+
+            </form>
+
+
+          </div> <!-- /container -->
+
+
+
+            <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+            <script src="js/index.js"></script>
+            <script src="js/libs/jquery-3.1.0.min.js"></script>
+            <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+
+            <script src="js/bootstrap.min.js"></script>
+
+            <script src="/socket.io/socket.io.js"></script>
+
+        <!--Before the Major workout==will be used later for validation==
+            <script src="js/libs/jquery.validate.js"></script>
+            <script src="js/signup.js"></script
+            -->
+            <script src="js/build.js"></script>
+            <script>
+              var socket = io();
+              socket.on('connect',()=>{
+                console.log('Connected to server');
+              });
+              socket.on('disconnect',()=>{
+                console.log('Disconnected from server');
+              });
+
+            </script>
+
+          </body>
+        </html>
