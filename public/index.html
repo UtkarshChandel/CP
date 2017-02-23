@@ -33,6 +33,19 @@
 <script type="text/javascript">
 //==Major firebase wiring==
 
+function postwo(path, params, method) {
+    method = method || "post";
+
+    var form = document.createElement("form");
+    form.setAttribute("method", method);
+    form.setAttribute("action", path);
+
+
+
+    document.body.appendChild(form);
+    form.submit();
+}
+
 // Click event                                              ====SIGNIN====
 function post(path, params, method) {
     method = method || "post";
@@ -62,6 +75,8 @@ function toggleSignIn() {
   if(firebase.auth().currentUser) {
           //If already signed in ..SignOut the user
         firebase.auth().signOut();
+        document.getElementById('displaySignedUser').innerHTML = "";
+
         //End
 
   }else{    //Basic chck length
@@ -78,16 +93,29 @@ function toggleSignIn() {
                           alert('Please Enter Password with min 8 chars');
                           return;
                          }
-                      //Continuing with sigin
+
+
+
+                                                  //Continuing with sigin
                       firebase.auth().signInWithEmailAndPassword(email,password).then(function (val){
+                        firebase.app().auth().getToken().then(function(data) {
+
+
                             $('#signoutBTN').hide();
                             $('#loader').show();
+                            // console.log("#####$$$$$$$$$$%%%%%%%%%%%");
+                            // console.log(data);
                             setTimeout(function(){
-                              post('/utk', {
+                              //postwo('/profile',data)
+                              post('/profile', {
                                 email: firebase.auth().currentUser.email,
-                                karan : 'Arjun'
-                                      });
-                            },1300);
+                                karan : 'Arjun',
+                                token : JSON.stringify(data)
+
+                              });
+                            },200);
+
+                            });
 
                             //window.location = "/utk";
 
@@ -177,11 +205,13 @@ function toggleSignIn() {
                     function initApp(){
                       //Listener for state change log in/out
                         firebase.auth().onAuthStateChanged(function(user) {
+
                           if (user) {
                             console.log("Signed in");
-                              // User is signed in.
+                            // User is signed in.
                               var displayName = user.displayName;
                               var email = user.email;
+                              document.getElementById('displaySignedUser').innerHTML = "Signed in as: "+email;
                               console.log(user.email);
                               var emailVerified = user.emailVerified;
                               console.log(emailVerified);
@@ -197,6 +227,7 @@ function toggleSignIn() {
        // [END_EXCLUDE]
      }else {
        console.log("NO USER");
+       
        document.getElementById('signoutBTN').value='Sign In';
      }
 });
@@ -212,21 +243,14 @@ window.onload = function() {
     };
 </script>
 
-
-
-
-
-
-
-
-
+<!--===================================\_()_/================================================-->
   <body>
 
       <div class="container" id="particles-js">
 
     <form class="form-signin" method="POST">
           <h2 class="form-signin-heading">Project CentralPoint</h2>
-          <p id="labeluser"></p>
+          <label id="displaySignedUser"></label>
           <label for="inputEmail" class="sr-only">Email address</label>
           <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
           <label for="inputPassword" class="sr-only">Password</label>

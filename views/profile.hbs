@@ -31,6 +31,50 @@
           firebase.initializeApp(config);
           </script>
 
+          <script>//Firebase-WiringGamr
+
+
+          function initApp(){
+            //Listener for state change log in/out
+              firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                  console.log("Signed in");
+                    // User is signed in.
+                    var displayName = user.displayName;
+                    var email = user.email;
+                    //document.getElementById('displaySignedUser').innerHTML = "Signed in as: "+email;
+                    console.log(user.email);
+                    var emailVerified = user.emailVerified;
+                    console.log(emailVerified);
+                    var photoURL = user.photoURL;
+                    var isAnonymous = user.isAnonymous;
+                    var uid = user.uid;
+                    var providerData = user.providerData;
+                    // [START_EXCLUDE silent]
+                    //document.getElementById('signoutBTN').value='Sign Out';
+
+
+
+// [END_EXCLUDE]
+                    }else {
+                        console.log("NO USER");
+                        document.getElementById('signoutBTN').value='Sign In';
+                        window.location = "/";
+                      }
+                        });
+
+
+
+//document.getElementById('signupBTN').addEventListener('click', handleSignUp, false);
+//document.getElementById('signoutBTN').addEventListener('click',toggleSignIn,false);
+  }
+  window.onload = function() {
+    initApp();
+//$('#loader').hide();
+  };
+
+          </script>
+
 
           <body>
 
@@ -39,8 +83,8 @@
             <form class="form-signin" method="POST">
                   <h2 class="form-signin-heading">Setup Your Profile</h2>
                   <p id="labeluser"></p>
-                  <label for="inputEmail" class="sr-only">Email address</label>
-                  <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                  <label for="inputEmail" class="sr-only">Full Name</label>
+                  <input type="text" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
                   <label for="inputPassword" class="sr-only">Password</label>
                   <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
                   <div class="checkbox">
@@ -53,7 +97,7 @@
                     <!-- Accent-colored raised button with ripple -->
                     <br>
                     <input type="button" value="" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="signoutBTN" />
-                    
+
 
             </form>
 

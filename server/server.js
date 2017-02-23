@@ -9,6 +9,7 @@ const {mongoose} = require('./db/mongoose');
 const {User} = require('./models/user');
 const hbs = require('hbs');
 const jQuery = require('jquery');
+var admin = require('firebase-admin');
 var app = express();
 var server = http.createServer(app);
 var io = socketIO(server);
@@ -16,6 +17,26 @@ const port = process.env.PORT || 3000;
 var dotenv = require('dotenv');
 dotenv.load();
 
+var config = {
+apiKey: "AIzaSyDWbOM-S0cUTsd2-BIMZ4gMb1emqm5Pf88",
+authDomain: "project-cp-def29.firebaseapp.com",
+databaseURL: "https://project-cp-def29.firebaseio.com",
+storageBucket: "project-cp-def29.appspot.com",
+messagingSenderId: "651436094861"
+};
+firebase.initializeApp(config);
+
+
+var serviceAccount = require("./project-cp-def29-firebase-adminsdk-zhxkc-15c6781de4.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://project-cp-def29.firebaseio.com"
+});
+
+
+
+//===INItialize firebase===================
 
 //====
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -30,10 +51,34 @@ app.use(express.static(__dirname +'./../public'));
 app.set('view engine',hbs);
 //===========================================================================//
 
-app.post('/utk',(req,res)=>{
-    console.log(req.body);
-    global.c = req.body.email;
-    res.render('profile.hbs');
+app.post('/profile',(req,res)=>{
+  console.log(req.body.token);
+  var accessToken = req.body.token
+
+  var ak = JSON.parse(accessToken);
+  console.log('ttookkeen');
+  console.log(ak.accessToken);
+
+  admin.auth().verifyIdToken(ak.accessToken)
+    .then(function(decodedToken) {
+      var uid = decodedToken.uid;
+      var mailid = decodedToken.email;
+      var isVerified = decodedToken.email_verified;
+      console.log("Success");
+      res.render('profile.hbs');
+      // ...
+    }).catch(function(error) {
+      res.render('four.hbs');
+      console.log('ERRRR');
+      console.log(error);
+
+      // Handle error
+    });
+
+
+    
+
+
 
 });
 
