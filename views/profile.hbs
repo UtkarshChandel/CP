@@ -123,7 +123,7 @@ document.getElementById('clcko').addEventListener('click',Bewagoof,false);
               <div class="container" id="particles-js">
 
                 <form class="mui-form">
-                      <h2 class="form-signin-heading">Complete your Profile </h2>
+                      <h2 id="prohead"class="form-signin-heading">Complete your Profile </h2>
                       <div class="mui-textfield mui-textfield--float-label" id="labcomppro">
                         <input type="text"  required>
                         <label>Name</label>
@@ -137,10 +137,14 @@ document.getElementById('clcko').addEventListener('click',Bewagoof,false);
                         <input type="number" value="" required>
                         <label>Enrollment Number</label>
                       </div>
-                      <button type="submit" class="mui-btn mui-btn--raised">Submit</button>
+                      <div class="mui-textfield mui-textfield--float-label">
+                        <input type="number" value="" required>
+                        <label>Roll No.</label>
+                      </div>
+                      <input type="button"  value="Submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="profilesubBTN" />
 
                       <div class='error' style='display:none' id="err"></div>
-                      <i class="em em-thumbsup"></i>
+
               </form>
 
 

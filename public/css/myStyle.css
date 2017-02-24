@@ -1,6 +1,10 @@
-body {
-  padding-top: 40px;
-  padding-bottom: 40px;
+html,body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  padding-top: 10px;
+
   background-color: #eee;
 }
 
@@ -44,11 +48,16 @@ body {
   margin-left: 35px;
 
 }
-
-.mdl-button{
+#prohead,
+.form-signin-heading{
+      font-size: 4rem;
 
 
 }
+.mui-textfield>input, .mui-textfield>textarea {
+      font-size: 20px;
+}
+
 .mdl-spinner{
 
   margin-left: 35px;
