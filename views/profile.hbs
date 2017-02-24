@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -11,6 +11,10 @@
 <!--Style-Sheets-->
     <link rel="stylesheet" href="/css/material.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|VT323" rel="stylesheet">
+
+    <link href="//cdn.muicss.com/mui-0.9.9/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <script src="//cdn.muicss.com/mui-0.9.9/js/mui.min.js"></script>
 
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/myStyle.css">
@@ -32,6 +36,18 @@
           </script>
 
           <script>//Firebase-WiringGamr
+
+          function Bewagoof(){
+            console.log("Inside Bewagoof");
+
+                      window.clck++;
+                      if(window.clck == 5 || window.clck == 12){
+                        document.getElementById('err').innerHTML = "Nalayak Disabled hai";
+                        $('.error').fadeIn(400).delay(3000).fadeOut(400);
+
+                      }
+                    }
+
 
 
           function initApp(){
@@ -67,6 +83,8 @@
 
 //document.getElementById('signupBTN').addEventListener('click', handleSignUp, false);
 //document.getElementById('signoutBTN').addEventListener('click',toggleSignIn,false);
+window.clck = 0;
+document.getElementById('clcko').addEventListener('click',Bewagoof,false);
   }
   window.onload = function() {
     initApp();
@@ -80,26 +98,25 @@
 
               <div class="container" id="particles-js">
 
-            <form class="form-signin" method="POST">
-                  <h2 class="form-signin-heading">Setup Your Profile</h2>
-                  <p id="labeluser"></p>
-                  <label for="inputEmail" class="sr-only">Full Name</label>
-                  <input type="text" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-                  <label for="inputPassword" class="sr-only">Password</label>
-                  <input type="text" id="inputPassword" class="form-control" placeholder="Password" required>
-                  <div class="checkbox">
-                  <label>
-                     <input type="checkbox" value="remember-me"> Remember me
-                  </label>
-                  </div>
+                <form class="mui-form">
+                      <h2 class="form-signin-heading">Complete your Profile </h2>
+                      <div class="mui-textfield mui-textfield--float-label" id="labcomppro">
+                        <input type="text"  required>
+                        <label>Name</label>
+                      </div>
+                      <div class="mui-textfield mui-textfield--float-label"  id="clcko">
+                        <input type="text" value="CM"  disabled>
+                        <label>Branch</label>
 
-                    <button class="btn btn-lg btn-primary btn-block" type="button" id="signupBTN">Sign up</button>
-                    <!-- Accent-colored raised button with ripple -->
-                    <br>
-                    <input type="button" value="" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="signoutBTN" />
+                      </div>
+                      <div class="mui-textfield mui-textfield--float-label">
+                        <textarea>Value on load</textarea>
+                        <label>Textarea</label>
+                      </div>
+                      <button type="submit" class="mui-btn mui-btn--raised">Submit</button>
 
-
-            </form>
+                      <div class='error' style='display:none' id="err"></div>
+              </form>
 
 
           </div> <!-- /container -->

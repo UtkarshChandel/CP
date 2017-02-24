@@ -148,6 +148,7 @@ function toggleSignIn() {
 }//toggleSignIn button END
             function letsgoPRO(){
               firebase.app().auth().getToken().then(function(data) {
+                window.location.reload(true);
                 post('/profile', {
                   email: firebase.auth().currentUser.email,
                   token : JSON.stringify(data)
@@ -200,6 +201,7 @@ function toggleSignIn() {
                           console.log("veri sent");
                           document.getElementById('err').innerHTML = "Email Verification Sent!!";
                           $('.error').fadeIn(400).delay(3000).fadeOut(400);
+
                     });
 
                   },function (error){
