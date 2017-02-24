@@ -18,40 +18,19 @@ var UserSchema = new mongoose.Schema({
     required : true,
     trim : true,
     unique : true,
-    validate : {
-      validator : validator.isEmail,
-      message : "{VALUE} is not a valid Email"
-    }
   },
-  password : {
-    type : String,
-    required : true,
-    minlength : 8
-  },
-  tokens : [{
-    access : {
-      type : String,
-      required : true
-    },
-    token : {
-      type : String,
-      required : true
-    }
-  }],
   course : {
     type : String,
     required : true
     },
-  year : {
-    type : Number,
-    min : 2016,
-    max : 2017
-
-  },
   rollno : {
     type : Number,
     min : 1,
     max : 79
+  },
+  enrollmentno : {
+    type : Number,
+    
   }
 
 });

@@ -90,6 +90,21 @@ app.post('/profile',(req,res)=>{
 
 });
 
+app.post('/personal',(req,res)=>{
+  var recvdata = req.body;
+  console.log(recvdata);
+  var user = new User(recvdata);
+
+  user.save().then(()=>{
+    console.log('Saved');
+  }).catch((e)=>{
+    res.status(400).send(e);
+    console.log(e);
+  })
+
+
+});
+
 io.on('connection',(socket)=>{
   if (!global.c) {
 

@@ -39,12 +39,46 @@
 
           <script>//Firebase-WiringGamr
           //<i class="em em-fire"></i> ==Bohot kam ki cheez hai
+          function post(path, params, method) {
+              method = method || "post";
+
+              var form = document.createElement("form");
+              form.setAttribute("method", method);
+              form.setAttribute("action", path);
+
+              for(var key in params) {
+                  if(params.hasOwnProperty(key)) {
+                      var hiddenField = document.createElement("input");
+                      hiddenField.setAttribute("type", "hidden");
+                      hiddenField.setAttribute("name", key);
+                      hiddenField.setAttribute("value", params[key]);
+
+                      form.appendChild(hiddenField);
+                   }
+              }
+
+              document.body.appendChild(form);
+              form.submit();
+          }
+
+
+          function Submission(){
+
+            post('/personal',{
+              name : document.getElementById('nameid').value,
+              email : window.email,
+              course : document.getElementById('courseid').value,
+              rollno : document.getElementById('rollnoid').value,
+              enrollmentno : document.getElementById('enrollmentid').value
+            });
+
+          }
 
           function Bewagoof(){
             console.log("Inside Bewagoof");
 
                       window.clck++;
-                      if(window.clck == 5){
+                      if(window.clck == 2){
                         document.getElementById('err').innerHTML = 'Currently Available for CM Only.';
                         $('.error').fadeIn(400).delay(3000).fadeOut(400);
 
@@ -67,7 +101,7 @@
                         document.getElementById('err').innerHTML = "Jaa simran jeeley apni zindagi!! ";
                         $('.error').fadeIn(400).delay(3000).fadeOut(400);
                       }else if (window.clck == 47) {
-                        document.getElementById('err').innerHTML = 'This whole session will be logged btw <i class="em em-innocent"></i>';
+                        document.getElementById('err').innerHTML = 'I will personally report you now..<i class="em em-innocent"></i>';
                         $('.error').fadeIn(400).delay(3000).fadeOut(400);
                     }
                   }
@@ -82,6 +116,7 @@
                     // User is signed in.
                     var displayName = user.displayName;
                     var email = user.email;
+                    window.email = user.email
                     //document.getElementById('displaySignedUser').innerHTML = "Signed in as: "+email;
                     console.log(user.email);
                     var emailVerified = user.emailVerified;
@@ -109,6 +144,8 @@
 //document.getElementById('signoutBTN').addEventListener('click',toggleSignIn,false);
 window.clck = 0;
 document.getElementById('clcko').addEventListener('click',Bewagoof,false);
+document.getElementById('profilesubBTN').addEventListener('click',Submission,false);
+
   }
   window.onload = function() {
     initApp();
@@ -125,20 +162,20 @@ document.getElementById('clcko').addEventListener('click',Bewagoof,false);
                 <form class="mui-form">
                       <h2 id="prohead"class="form-signin-heading">Complete your Profile </h2>
                       <div class="mui-textfield mui-textfield--float-label" id="labcomppro">
-                        <input type="text"  required>
+                        <input id="nameid" type="text"  required>
                         <label>Name</label>
                       </div>
                       <div class="mui-textfield mui-textfield--float-label"  id="clcko">
-                        <input type="text" value="CM"  disabled>
+                        <input id="courseid"type="text" value="CM"  disabled>
                         <label>Branch</label>
 
                       </div>
                       <div class="mui-textfield mui-textfield--float-label">
-                        <input type="number" value="" required>
+                        <input  id="enrollmentid"type="number" value="" required>
                         <label>Enrollment Number</label>
                       </div>
                       <div class="mui-textfield mui-textfield--float-label">
-                        <input type="number" value="" required>
+                        <input  id="rollnoid"type="number" value="" required>
                         <label>Roll No.</label>
                       </div>
                       <input type="button"  value="Submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="profilesubBTN" />
