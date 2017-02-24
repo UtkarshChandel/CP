@@ -38,11 +38,21 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+#profileBTN,
 .mdl-button{
-  margin-left: 100px;
+  margin-left: 35px;
+
+}
+
+.mdl-button{
+
+
 }
 .mdl-spinner{
-  margin-left: 130px;
+
+  margin-left: 35px;
+  bottom: -10px;
 }
 .error {
 
