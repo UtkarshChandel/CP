@@ -9,6 +9,8 @@
 
 
 <!--Style-Sheets-->
+    <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+
     <link rel="stylesheet" href="/css/material.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|VT323" rel="stylesheet">
@@ -36,18 +38,19 @@
           </script>
 
           <script>//Firebase-WiringGamr
+          //<i class="em em-fire"></i> ==Bohot kam ki cheez hai
 
           function Bewagoof(){
             console.log("Inside Bewagoof");
 
                       window.clck++;
                       if(window.clck == 5){
-                        document.getElementById('err').innerHTML = "Currently available for CM only #Burn";
+                        document.getElementById('err').innerHTML = 'Currently Available for CM Only.';
                         $('.error').fadeIn(400).delay(3000).fadeOut(400);
 
                       }
                       else if (window.clck == 8) {
-                        document.getElementById('err').innerHTML = "Go on Lets Play!!";
+                        document.getElementById('err').innerHTML = 'Go on Lets Play!! <i class="em em-checkered_flag"></i>';
                         $('.error').fadeIn(400).delay(3000).fadeOut(400);
 
                       }else if (window.clck == 19) {
@@ -55,16 +58,16 @@
                         $('.error').fadeIn(400).delay(3000).fadeOut(400);
 
                       }else if (window.clck == 25) {
-                        document.getElementById('err').innerHTML = "#Lonely_Human!!";
+                        document.getElementById('err').innerHTML = '#Lonely_Human!!<i class="em em-baby_chick"></i>';
                         $('.error').fadeIn(400).delay(3000).fadeOut(400);
                       }else if (window.clck == 35) {
                         document.getElementById('err').innerHTML = "I am a pre-programmed Software still I have a better 'life' (pun)";
                         $('.error').fadeIn(400).delay(3000).fadeOut(400);
                       }else if (window.clck == 41) {
-                        document.getElementById('err').innerHTML = "Jaa simran jeeley apni zindagi";
+                        document.getElementById('err').innerHTML = "Jaa simran jeeley apni zindagi!! ";
                         $('.error').fadeIn(400).delay(3000).fadeOut(400);
                       }else if (window.clck == 47) {
-                        document.getElementById('err').innerHTML = "This whole session will be logged btw :P";
+                        document.getElementById('err').innerHTML = 'This whole session will be logged btw <i class="em em-innocent"></i>';
                         $('.error').fadeIn(400).delay(3000).fadeOut(400);
                     }
                   }
@@ -131,12 +134,13 @@ document.getElementById('clcko').addEventListener('click',Bewagoof,false);
 
                       </div>
                       <div class="mui-textfield mui-textfield--float-label">
-                        <textarea>Value on load</textarea>
-                        <label>Textarea</label>
+                        <input type="number" value="" required>
+                        <label>Enrollment Number</label>
                       </div>
                       <button type="submit" class="mui-btn mui-btn--raised">Submit</button>
 
                       <div class='error' style='display:none' id="err"></div>
+                      <i class="em em-thumbsup"></i>
               </form>
 
 
