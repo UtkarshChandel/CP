@@ -11,6 +11,7 @@
 <!--Style-Sheets-->
     <link rel="stylesheet" href="/css/material.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|VT323" rel="stylesheet">
 
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/myStyle.css">
@@ -144,11 +145,15 @@ function toggleSignIn() {
 
               var password = document.getElementById('inputPassword').value;
                 if(email.length < 4){
-                    alert("Enter valid email");
+
+                    document.getElementById('err').innerHTML = "Enter a Valid Email";
+                    $('.error').fadeIn(400).delay(3000).fadeOut(400);
                     return;
                 }
                 if(password.length < 8){
-                  alert("Enter a valid password");
+                  document.getElementById('err').innerHTML = "Enter a Valid password";
+                  $('.error').fadeIn(400).delay(3000).fadeOut(400);
+                  
                   return;
                 }
 
@@ -158,9 +163,12 @@ function toggleSignIn() {
                         //Error def.
                           if(errorCode == 'auth/weak-password')
                           {
-                              alert('The password is too weak');
+                            document.getElementById('err').innerHTML = "The password is too weak";
+                            $('.error').fadeIn(400).delay(3000).fadeOut(400);
                           }else if(errorCode == 'auth/email-already-in-use'){
-                            alert(errorMessage);
+
+                            document.getElementById('err').innerHTML = errorMessage;
+                            $('.error').fadeIn(400).delay(3000).fadeOut(400);
                             console.log(errorCode);
                             throw 'alreadyError'
 
@@ -267,6 +275,8 @@ window.onload = function() {
             <input type="button"  value="" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="signoutBTN" />
             <!-- MDL Spinner Component -->
              <div class="mdl-spinner mdl-js-spinner is-active" id="loader"></div>
+
+             <div class='error' style='display:none' id="err"></div>
 
 
     </form>
