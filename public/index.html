@@ -86,12 +86,16 @@ function toggleSignIn() {
             var password = document.getElementById('inputPassword').value;
                   if(email.length < 4)
                   {
-                        alert('Please enter an email address');
+                    document.getElementById('err').innerHTML = "Please enter a valid email address";
+                    $('.error').fadeIn(400).delay(3000).fadeOut(400);
+
                         return;
                   }
                   if(password.length < 8)
                          {
-                          alert('Please Enter Password with min 8 chars');
+                           document.getElementById('err').innerHTML = "Please Enter Password with min 8 chars";
+                           $('.error').fadeIn(400).delay(3000).fadeOut(400);
+                          
                           return;
                          }
 
@@ -153,7 +157,7 @@ function toggleSignIn() {
                 if(password.length < 8){
                   document.getElementById('err').innerHTML = "Enter a Valid password";
                   $('.error').fadeIn(400).delay(3000).fadeOut(400);
-                  
+
                   return;
                 }
 
