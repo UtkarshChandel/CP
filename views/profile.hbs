@@ -63,14 +63,23 @@
 
 
           function Submission(){
+            if (document.getElementById('nameid').value != "" && document.getElementById('courseid').value != "" &&
+                document.getElementById('rollnoid').value != "" && document.getElementById('enrollmentnoid').value != "") {
 
-            post('/personal',{
-              name : document.getElementById('nameid').value,
-              email : window.email,
-              course : document.getElementById('courseid').value,
-              rollno : document.getElementById('rollnoid').value,
-              enrollmentno : document.getElementById('enrollmentid').value
-            });
+              post('/personal',{
+                name : document.getElementById('nameid').value,
+                email : window.email,
+                course : document.getElementById('courseid').value,
+                rollno : document.getElementById('rollnoid').value,
+                enrollmentno : document.getElementById('enrollmentid').value
+              });
+
+            }else {
+              document.getElementById('err').innerHTML = 'Please Fill all the Required Fields';
+              $('.error').fadeIn(400).delay(3000).fadeOut(400);
+            }
+
+
 
           }
 

@@ -30,10 +30,12 @@ var UserSchema = new mongoose.Schema({
   },
   enrollmentno : {
     type : Number,
-    
+
   }
 
 });
+
+
 
 
 
