@@ -35,6 +35,33 @@ var UserSchema = new mongoose.Schema({
 
 });
 
+UserSchema.statics.findWhetherEnrollment = function(enrollmentno,rollno){
+  var User = this;
+  console.log("inside mongo whether");
+    return User.findOne({$or:[{enrollmentno},{rollno}]}).then((user)=>{
+      if(!user){
+        console.log("no user");
+        return Promise.reject()
+      }
+
+      return user;
+
+    })
+}
+//{$or:[{enrollmentno},{rollno}]}
+
+// UserSchema.statics.findWhetherRollno = function(rollno){
+//   var User = this;
+//
+//     return User.findOne({rollno}).then((user)=>{
+//       if(!user){
+//         return Promise.reject()
+//       }
+//
+//       return user;
+//
+//     })
+// }
 
 
 

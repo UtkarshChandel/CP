@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="/css/myStyle.css">
 <!--  <link rel="stylesheet" href="/css/style.css"> --><!--Later-->
     <script defer src="/js/material.min.js"></script>
+
     </head>
     <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
               <script>
@@ -265,6 +266,7 @@ function toggleSignIn() {
                             if (user.emailVerified) {
                                 $('#profileBTN').show();
                                 document.getElementById('signoutBTN').value='Sign Out';
+                                var email = user.email;
                                 document.getElementById('displaySignedUser').innerHTML = "Signed in as: "+email;
                             }
 
@@ -272,8 +274,8 @@ function toggleSignIn() {
 
                             // User is signed in.
                               var displayName = user.displayName;
-                              var email = user.email;
-                              
+
+
                               console.log(user.email);
                               var emailVerified = user.emailVerified;
                               console.log(emailVerified);

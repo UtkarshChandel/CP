@@ -53,6 +53,7 @@ app.set('view engine',hbs);
 
 app.post('/profile',(req,res)=>{
 
+
   var accessToken = req.body.token
 
   var ak = JSON.parse(accessToken);
@@ -68,7 +69,9 @@ app.post('/profile',(req,res)=>{
 
       if(isVerified){
         console.log("Success");
-        res.render('profile.hbs');
+        res.render('profile.hbs',{
+
+        });
       }
       else {
         res.status(400).render('four.hbs');
@@ -101,6 +104,21 @@ app.post('/personal',(req,res)=>{
     res.status(400).send(e);
     console.log(e);
   })
+
+
+});
+
+app.post('/check',(req,res)=>{
+  var body = _.pick(req.body,['enrollmentno','rollno']);
+  console.log(body);
+  //var body2roll = _.pick(req.body,['rollno'])
+//body.enrollmentno,
+    User.findWhetherEnrollment(body.enrollmentno,body.rollno).then((user)=>{
+      console.log("user exists ");
+      res.send("alreadyexists");
+  }).catch((e)=>{
+      res.send("allgood");
+  });
 
 
 });

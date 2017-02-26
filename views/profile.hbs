@@ -9,7 +9,7 @@
 
 
 <!--Style-Sheets-->
-    <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+    <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet"><!--EMOJEES-->
 
     <link rel="stylesheet" href="/css/material.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -24,6 +24,7 @@
     <script defer src="/js/material.min.js"></script>
     </head>
     <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+
               <script>
 
           // Initialize Firebase
@@ -64,7 +65,7 @@
 
           function Submission(){
             if (document.getElementById('nameid').value != "" && document.getElementById('courseid').value != "" &&
-                document.getElementById('rollnoid').value != "" && document.getElementById('enrollmentnoid').value != "") {
+                document.getElementById('rollnoid').value != "" && document.getElementById('enrollmentid').value != "") {
 
               post('/personal',{
                 name : document.getElementById('nameid').value,
@@ -199,13 +200,19 @@ document.getElementById('profilesubBTN').addEventListener('click',Submission,fal
 
 
             <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
             <script src="js/index.js"></script>
             <script src="js/libs/jquery-3.1.0.min.js"></script>
+            <script src="js/checkChange.js"></script>
+
             <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
 
             <script src="js/bootstrap.min.js"></script>
 
             <script src="/socket.io/socket.io.js"></script>
+
+
+
 
         <!--Before the Major workout==will be used later for validation==
             <script src="js/libs/jquery.validate.js"></script>
