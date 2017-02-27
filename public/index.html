@@ -131,7 +131,7 @@ function toggleSignIn() {
                                 $('#signoutBTN').show();
 
                               document.getElementById('err').innerHTML = "Please verify Your Email";
-                              $('.error').fadeIn(400).delay(3000).fadeOut(400);
+                              $('.error').fadeIn(400).delay(2000).fadeOut(400);
                               toggleSignIn();
 
                             }
@@ -258,6 +258,7 @@ function toggleSignIn() {
                   }
 
                     function initApp(){
+
                       //Listener for state change log in/out
                         firebase.auth().onAuthStateChanged(function(user) {
 
@@ -343,6 +344,31 @@ window.onload = function() {
 
 
   </div> <!-- /container -->
+<script src="http://hammerjs.github.io/dist/hammer.min.js"></script>
+    <script>
+       var myElement = document.getElementById('displaySignedUser');
+
+        // create a simple instance
+        // by default, it only adds horizontal recognizers
+        var mc = new Hammer(myElement);
+
+        // listen to events...
+        mc.on("panleft panright tap press", function(ev) {
+          if (ev.type == "press") {
+            if (myElement.innerHTML == "Signed in as: personal.utkarsh24@gmail.com") {
+              document.getElementById('err').innerHTML = "Utk";
+              $('.error').fadeIn(400).delay(3000).fadeOut(400);
+
+            }
+
+
+          }
+
+
+          //console.log(ev.type +" gesture detected.");
+        });
+
+    </script>
 
 
 

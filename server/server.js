@@ -66,13 +66,25 @@ app.post('/profile',(req,res)=>{
       var mailid = decodedToken.email;
       var isVerified = decodedToken.email_verified;
       global.c = mailid;
+      console.log('mail id idhar hai jo send ho rha hai!!');
+      console.log(mailid);
 
-      if(isVerified){
-        console.log("Success");
-        res.render('profile.hbs',{
-
+      if (isVerified) {
+        User.findWhetherEnrollment("","",mailid).then((user)=>{
+          console.log("This is second run");
+          res.render('secondRun.hbs');
+        }).catch((e)=>{
+          res.render('profile.hbs')
         });
       }
+
+
+      // if(isVerified){
+      //   console.log("Success");
+      //   res.render('profile.hbs',{
+      //
+      //   });
+      // }
       else {
         res.status(400).render('four.hbs');
       }
@@ -86,11 +98,6 @@ app.post('/profile',(req,res)=>{
       // Handle error
     });
 
-
-
-
-
-
 });
 
 app.post('/personal',(req,res)=>{
@@ -100,8 +107,9 @@ app.post('/personal',(req,res)=>{
 
   user.save().then(()=>{
     console.log('Saved');
+    res.render('secondRun.hbs');
   }).catch((e)=>{
-    res.status(400).send(e);
+    res.status(400).send();
     console.log(e);
   })
 
@@ -139,6 +147,6 @@ io.on('connection',(socket)=>{
 
 
 
-server.listen(port,()=>{
+server.listen(port,'0.0.0.0',()=>{
   console.log(`UP on ${port}!!!`);
 });
