@@ -88,3 +88,6 @@ html,body {
 .mui-form {
   background-color: inherit;
 }
+.mdl-radio{
+  padding-right : 2px;
+}

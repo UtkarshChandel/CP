@@ -8,6 +8,8 @@
     <title>Project-CentralPoint</title>
 
     <link rel="stylesheet" href="/css/material.min.css">
+
+    <link rel="stylesheet" href="/css/seconRunStyle.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|VT323" rel="stylesheet">
 
@@ -18,7 +20,94 @@
 
 
   </head>
+  <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+<script>
 
+                    // Initialize Firebase
+                            var config = {
+                            apiKey: "AIzaSyDWbOM-S0cUTsd2-BIMZ4gMb1emqm5Pf88",
+                            authDomain: "project-cp-def29.firebaseapp.com",
+                            databaseURL: "https://project-cp-def29.firebaseio.com",
+                            storageBucket: "project-cp-def29.appspot.com",
+                            messagingSenderId: "651436094861"
+                            };
+                    firebase.initializeApp(config);
+</script>
+
+<script>
+                      function post(path, params, method) {
+                          method = method || "post";
+
+                          var form = document.createElement("form");
+                          form.setAttribute("method", method);
+                          form.setAttribute("action", path);
+
+                          for(var key in params) {
+                              if(params.hasOwnProperty(key)) {
+                                  var hiddenField = document.createElement("input");
+                                  hiddenField.setAttribute("type", "hidden");
+                                  hiddenField.setAttribute("name", key);
+                                  hiddenField.setAttribute("value", params[key]);
+
+                                  form.appendChild(hiddenField);
+                               }
+                          }
+
+                          document.body.appendChild(form);
+                          form.submit();
+                      }
+
+
+
+                      function initApp(){
+                        //Listener for state change log in/out
+                          firebase.auth().onAuthStateChanged(function(user) {
+                            if (user) {
+                              console.log("Signed in");
+                                // User is signed in.
+                                var displayName = user.displayName;
+                                var email = user.email;
+                                window.email = user.email
+                                //document.getElementById('displaySignedUser').innerHTML = "Signed in as: "+email;
+                                console.log(user.email);
+                                var emailVerified = user.emailVerified;
+                                console.log(emailVerified);
+                                var photoURL = user.photoURL;
+                                var isAnonymous = user.isAnonymous;
+                                var uid = user.uid;
+                                var providerData = user.providerData;
+                                // [START_EXCLUDE silent]
+                                //document.getElementById('signoutBTN').value='Sign Out';
+
+
+
+                      // [END_EXCLUDE]
+                                }else {
+                                    console.log("NO USER");
+                                    window.location = "/";
+                                  }
+                                    });
+
+
+
+
+                      //document.getElementById('signoutBTN').addEventListener('click',toggleSignIn,false);
+                      window.clck = 0
+
+
+                      }
+                      window.onload = function() {
+                      initApp();
+                      //$('#loader').hide();
+                      };
+
+
+
+
+
+
+
+</script>
 
 
 
@@ -26,50 +115,26 @@
 
   <body>
 
-    <!-- Numeric Textfield with Floating Label -->
-    <!-- Uses a transparent header that draws on top of the layout's background -->
-    <style>
-    html,body {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      padding-top: 0px;
 
-      background-color: inherit;
-    }
-    .demo-layout-transparent {
-          background-color: #eee;
-    }
-    .demo-layout-transparent .mdl-layout__header,
-    .demo-layout-transparent .mdl-layout__drawer-button {
-      /* This background is dark, so we set text to white. Use 87% black instead if
-         your background is light. */
-      color: white;
-    }
-    .demo-layout-transparent .mdl-layout__drawer-button {
-    color: #ff4081;
-}
-    .mdl-layout-title{
-      color: #ff4081;
-    }
-    .mdl-layout__drawer{
-      background-color: #f6f6f6;
-    }
-    </style>
 
     <div class="demo-layout-transparent mdl-layout mdl-js-layout">
       <header class="mdl-layout__header mdl-layout__header--transparent">
+
+
         <div class="mdl-layout__header-row">
           <!-- Title -->
           <span class="mdl-layout-title">Title</span>
+
+
           <!-- Add spacer, to align navigation to the right -->
           <div class="mdl-layout-spacer"></div>
+
 
         </div>
       </header>
       <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">Title</span>
+        <span class="mdl-layout-title" id="titleofdrawer"></span>
+        <label id="emaillabelUNDER"></label>
         <nav class="mdl-navigation">
           <a class="mdl-navigation__link" href="">Link</a>
           <a class="mdl-navigation__link" href="">Link</a>
@@ -78,9 +143,36 @@
         </nav>
       </div>
       <main class="mdl-layout__content">
+      <!-- this is where the main begins -->
+
+
+
       </main>
     </div>
+    <script src="/socket.io/socket.io.js"></script>
 
+
+
+
+  <!--Before the Major workout==will be used later for validation==
+    <script src="js/libs/jquery.validate.js"></script>
+    <script src="js/signup.js"></script
+    -->
+    <script src="js/libs/jquery-3.1.0.min.js"></script>
+
+    <script src="js/getuserInfo.js"></script>
+
+
+
+    <script>
+      var socket = io();
+      socket.on('connect',()=>{
+        console.log('Connected to server');
+      });
+      socket.on('disconnect',()=>{
+        console.log('Disconnected from server');
+      });
+      </script>
 
 
   </body>

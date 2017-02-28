@@ -12,6 +12,11 @@ var UserSchema = new mongoose.Schema({
     minlength : 3,
 
   },
+  gender : {
+    type : String,
+    uppercase : true,
+    
+  },
   email : {
     type : String,
     lowercase : true,

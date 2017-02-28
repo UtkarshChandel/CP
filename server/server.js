@@ -66,7 +66,7 @@ app.post('/profile',(req,res)=>{
       var mailid = decodedToken.email;
       var isVerified = decodedToken.email_verified;
       global.c = mailid;
-      console.log('mail id idhar hai jo send ho rha hai!!');
+      //console.log('mail id idhar hai jo send ho rha hai!!')
       console.log(mailid);
 
       if (isVerified) {
@@ -117,11 +117,13 @@ app.post('/personal',(req,res)=>{
 });
 
 app.post('/check',(req,res)=>{
-  var body = _.pick(req.body,['enrollmentno','rollno']);
+  var body = _.pick(req.body,['enrollmentno','rollno','email','kkr']);
+  console.log("CHECKPOINT BODY RECVD");
+  console.log(body.email);
   console.log(body);
   //var body2roll = _.pick(req.body,['rollno'])
 //body.enrollmentno,
-    User.findWhetherEnrollment(body.enrollmentno,body.rollno).then((user)=>{
+    User.findWhetherEnrollment(body.enrollmentno,body.rollno,body.email).then((user)=>{
       console.log("user exists ");
       res.send("alreadyexists");
   }).catch((e)=>{
@@ -130,6 +132,25 @@ app.post('/check',(req,res)=>{
 
 
 });
+
+app.post('/userINFO',(req,res)=>{
+  var reqBody = _.pick(req.body,['reqMail']);
+  console.log("CHECKPOINT BODY RECVD");
+  console.log(reqBody.reqMail);
+
+  User.findWhetherEnrollment("","",reqBody.reqMail).then((user)=>{
+    res.send(user);
+
+  }).catch((e)=>{
+    res.send("No User found with this mail");
+
+});
+});
+
+
+
+
+
 
 io.on('connection',(socket)=>{
   if (!global.c) {

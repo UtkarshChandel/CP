@@ -1,0 +1,34 @@
+html,body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  padding-top: 0px;
+
+  background-color: inherit;
+}
+.demo-layout-transparent {
+      background-color: #eee;
+}
+.demo-layout-transparent .mdl-layout__header,
+.demo-layout-transparent .mdl-layout__drawer-button {
+  /* This background is dark, so we set text to white. Use 87% black instead if
+     your background is light. */
+  color: #ff4081;
+}
+.demo-layout-transparent .mdl-layout__drawer-button {
+color: #ff4081;
+
+}
+.mdl-layout-title{
+  color: #ff4081;
+}
+.mdl-layout__drawer{
+  background-color: #f6f6f6;
+}
+#emaillabelUNDER {
+  position: relative;
+  padding-left: 12px;
+  bottom: 15px;
+
+}

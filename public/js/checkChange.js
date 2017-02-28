@@ -1,5 +1,27 @@
 $(document).ready(function(){
 
+
+    $.ajax({
+      url : '/check',
+      type : 'POST',
+      data : {
+        
+        email : window.email
+      },
+      success : function(response){
+
+        if (response == "alreadyexists") {
+            document.getElementById('err').innerHTML = 'Sorry User already Exists';
+            $('.error').fadeIn(400).delay(3000).fadeOut(400);
+            location.reload();
+
+      }
+
+    }
+  });
+
+
+
     $('#rollnoid').change(function(){
       console.log('roll going');
 

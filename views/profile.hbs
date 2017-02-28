@@ -18,10 +18,12 @@
     <link href="//cdn.muicss.com/mui-0.9.9/css/mui.min.css" rel="stylesheet" type="text/css" />
     <script src="//cdn.muicss.com/mui-0.9.9/js/mui.min.js"></script>
 
+
     <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/myStyle.css">
+
 <!--  <link rel="stylesheet" href="/css/style.css"> --><!--Later-->
     <script defer src="/js/material.min.js"></script>
+        <link rel="stylesheet" href="/css/myStyle.css">
     </head>
     <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
 
@@ -65,10 +67,17 @@
 
           function Submission(){
             if (document.getElementById('nameid').value != "" && document.getElementById('courseid').value != "" &&
-                document.getElementById('rollnoid').value != "" && document.getElementById('enrollmentid').value != "") {
-
+                document.getElementById('rollnoid').value != "" && document.getElementById('enrollmentid').value != "" &&
+                $('input[name=options]:checked').val() == "1" || $('input[name=options]:checked').val() == "2" ){
+                     if ($('input[name=options]:checked').val() == "1") {
+                          var gender = 'M';
+                     }else if ($('input[name=options]:checked').val() == "2") {
+                          var gender = 'F';
+                     }
               post('/personal',{
+
                 name : document.getElementById('nameid').value,
+                gender : gender,
                 email : window.email,
                 course : document.getElementById('courseid').value,
                 rollno : document.getElementById('rollnoid').value,
@@ -86,6 +95,7 @@
 
           function Bewagoof(){
             console.log("Inside Bewagoof");
+
 
                       window.clck++;
                       if(window.clck == 2){
@@ -140,11 +150,15 @@
 
 
 
+
+
+
 // [END_EXCLUDE]
                     }else {
                         console.log("NO USER");
                         document.getElementById('signoutBTN').value='Sign In';
                         window.location = "/";
+                        window.email = "";
                       }
                         });
 
@@ -174,7 +188,25 @@ document.getElementById('profilesubBTN').addEventListener('click',Submission,fal
                       <div class="mui-textfield mui-textfield--float-label" id="labcomppro">
                         <input id="nameid" type="text"  required>
                         <label>Name</label>
+
+
                       </div>
+                      <div>
+
+                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
+                          <input type="radio" id="option-1" class="mdl-radio__button" name="options" value="1">
+                          <span class="mdl-radio__label">Male</span>
+                        </label>
+
+                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
+                          <input type="radio" id="option-2" class="mdl-radio__button" name="options" value="2">
+                          <span class="mdl-radio__label">Female</span>
+
+                        </label>
+
+                      </div>
+                      <br>
+
                       <div class="mui-textfield mui-textfield--float-label"  id="clcko">
                         <input id="courseid"type="text" value="CM"  disabled>
                         <label>Branch</label>
@@ -203,7 +235,23 @@ document.getElementById('profilesubBTN').addEventListener('click',Submission,fal
 
             <script src="js/index.js"></script>
             <script src="js/libs/jquery-3.1.0.min.js"></script>
+
+            <script>
+            console.log("Testing window value alive");
+            firebase.auth().onAuthStateChanged(function(user) {
+              if (user) {
+                window.email = user.email
+
+
+              }else {
+                window.email = ""
+              }
+            })
+
+            </script>
             <script src="js/checkChange.js"></script>
+
+
 
             <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
 
