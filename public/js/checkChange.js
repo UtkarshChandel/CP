@@ -1,11 +1,21 @@
 $(document).ready(function(){
 
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      window.email = user.email
+      console.log("checking here");
+      console.log(window.email);
+
+
+    }else {
+      window.email = ""
+    }
 
     $.ajax({
       url : '/check',
       type : 'POST',
       data : {
-        
+
         email : window.email
       },
       success : function(response){
@@ -19,6 +29,30 @@ $(document).ready(function(){
 
     }
   });
+
+
+  $.ajax({
+    url : '/isTeach',
+    type : 'POST',
+    data : {
+      email : window.email
+    },
+    success : function(response){
+
+      if(response == "isTeacher"){
+        window.location = "/Teacher";
+      }
+    }
+  });
+
+
+
+
+
+
+
+
+});
 
 
 

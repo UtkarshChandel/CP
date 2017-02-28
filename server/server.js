@@ -6,6 +6,7 @@ const socketIO = require('socket.io');
 const firebase = require('firebase');
 
 const {mongoose} = require('./db/mongoose');
+const {Teacher} = require('./models/teacher')
 const {User} = require('./models/user');
 const hbs = require('hbs');
 const jQuery = require('jquery');
@@ -147,7 +148,13 @@ app.post('/userINFO',(req,res)=>{
 });
 });
 
+app.post('/isTeacher',(req,res)=>{
+  var body = _.pick(req.body,['email'])
+  console.log('Teacher !!chck point!!');
+  console.log(body.email);
 
+
+});
 
 
 

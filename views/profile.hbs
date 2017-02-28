@@ -19,6 +19,7 @@
     <script src="//cdn.muicss.com/mui-0.9.9/js/mui.min.js"></script>
 
 
+
     <link rel="stylesheet" href="/css/bootstrap.min.css">
 
 <!--  <link rel="stylesheet" href="/css/style.css"> --><!--Later-->
@@ -26,6 +27,9 @@
         <link rel="stylesheet" href="/css/myStyle.css">
     </head>
     <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+    <script src="js/libs/jquery-3.1.0.min.js"></script>
+    <script src="js/checkChange.js"></script>
+
 
               <script>
 
@@ -234,22 +238,6 @@ document.getElementById('profilesubBTN').addEventListener('click',Submission,fal
             <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
             <script src="js/index.js"></script>
-            <script src="js/libs/jquery-3.1.0.min.js"></script>
-
-            <script>
-            console.log("Testing window value alive");
-            firebase.auth().onAuthStateChanged(function(user) {
-              if (user) {
-                window.email = user.email
-
-
-              }else {
-                window.email = ""
-              }
-            })
-
-            </script>
-            <script src="js/checkChange.js"></script>
 
 
 

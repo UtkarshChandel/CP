@@ -15,7 +15,7 @@ var UserSchema = new mongoose.Schema({
   gender : {
     type : String,
     uppercase : true,
-    
+
   },
   email : {
     type : String,
@@ -46,7 +46,7 @@ UserSchema.statics.findWhetherEnrollment = function(enrollmentno,rollno,email){
 //  console.log("inside mongo whether");
     return User.findOne({$or:[{enrollmentno},{rollno},{email}]}).then((user)=>{
       if(!user){
-        console.log("no user");
+        console.log("No such with provided criteria exists -DB");
         return Promise.reject();
       }
 
