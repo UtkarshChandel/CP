@@ -148,10 +148,20 @@ app.post('/userINFO',(req,res)=>{
 });
 });
 
-app.post('/isTeacher',(req,res)=>{
+app.post('/isTeach',(req,res)=>{
   var body = _.pick(req.body,['email'])
   console.log('Teacher !!chck point!!');
   console.log(body.email);
+  Teacher.findWheatherTeacher(body.email).then((teacher)=>{
+
+        res.send("isTeacher")
+
+
+
+
+  }).catch((e)=>{
+      res.send("No Teacher found -server")
+  });
 
 
 });

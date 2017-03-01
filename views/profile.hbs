@@ -95,6 +95,33 @@
 
 
 
+          }//User[Student]submission End
+          function TeacherSubmission(){
+            if (document.getElementById('nameid').value != "" && document.getElementById('courseid').value != "" &&
+                document.getElementById('enrollmentid').value != "" &&
+                $('input[name=options]:checked').val() == "1" || $('input[name=options]:checked').val() == "2" ){
+                     if ($('input[name=options]:checked').val() == "1") {
+                          var gender = 'M';
+                     }else if ($('input[name=options]:checked').val() == "2") {
+                          var gender = 'F';
+                     }
+                     post('/personal',{
+
+                       name : document.getElementById('nameid').value,
+                       gender : gender,
+                       email : window.email,
+                       course : document.getElementById('courseid').value,
+                       enrollmentno : document.getElementById('enrollmentid').value
+                     });
+
+                   }else {
+                     document.getElementById('err').innerHTML = 'Please Fill all the Required Fields';
+                     $('.error').fadeIn(400).delay(3000).fadeOut(400);
+                   }
+
+
+
+
           }
 
           function Bewagoof(){
@@ -172,7 +199,7 @@
 //document.getElementById('signoutBTN').addEventListener('click',toggleSignIn,false);
 window.clck = 0;
 document.getElementById('clcko').addEventListener('click',Bewagoof,false);
-document.getElementById('profilesubBTN').addEventListener('click',Submission,false);
+// document.getElementById('profilesubBTN').addEventListener('click',Submission,false); ===else condition
 
   }
   window.onload = function() {
@@ -218,11 +245,11 @@ document.getElementById('profilesubBTN').addEventListener('click',Submission,fal
                       </div>
                       <div class="mui-textfield mui-textfield--float-label">
                         <input  id="enrollmentid"type="number" value="" required>
-                        <label>Enrollment Number</label>
+                        <label id="enrollLabel">Enrollment Number</label>
                       </div>
                       <div class="mui-textfield mui-textfield--float-label">
                         <input  id="rollnoid"type="number" value="" required>
-                        <label>Roll No.</label>
+                        <label id="rollnoLabel">Roll No.</label>
                       </div>
                       <input type="button"  value="Submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="profilesubBTN" />
 

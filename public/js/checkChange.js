@@ -11,7 +11,39 @@ $(document).ready(function(){
       window.email = ""
     }
 
-    $.ajax({
+    $.ajax({                    //====This is To chck whether the emailID is of a Teacher====
+      url : '/isTeach',
+      type : 'POST',
+      data : {
+        email : window.email
+      },
+      success : function(response){
+
+        if(response == "isTeacher"){
+          console.log("This is a teacher");
+          $('#rollnoid').hide(1000);
+          $('#rollnoLabel').hide(1000);
+          document.getElementById('enrollLabel').innerHTML = '';
+          document.getElementById('enrollLabel').innerHTML = 'Unique ID';
+          $('#profilesubBTN').css("background-color","#0275d8");
+          document.getElementById('profilesubBTN').addEventListener('click',TeacherSubmission,false);
+
+
+
+
+
+        }else {
+          document.getElementById('profilesubBTN').addEventListener('click',Submission,false);
+
+        }
+      }
+    });
+
+
+
+
+
+    $.ajax({   //===This is to prevent loop creation of profile form data to chck whether the user exists in DB already====
       url : '/check',
       type : 'POST',
       data : {
@@ -29,25 +61,6 @@ $(document).ready(function(){
 
     }
   });
-
-
-  $.ajax({
-    url : '/isTeach',
-    type : 'POST',
-    data : {
-      email : window.email
-    },
-    success : function(response){
-
-      if(response == "isTeacher"){
-        window.location = "/Teacher";
-      }
-    }
-  });
-
-
-
-
 
 
 
@@ -87,8 +100,8 @@ $(document).ready(function(){
 
 
 
-    $('#enrollmentid').change(function () {
-      //console.log(document.getElementById('enrollmentid').value);
+    $('#enrollmentid').keyup(function () {
+      console.log(document.getElementById('enrollmentid').value);
 
       $.ajax({
         url : '/check',

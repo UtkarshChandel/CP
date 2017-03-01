@@ -13,7 +13,7 @@ $(document).ready(function(){
     }
 
 
-    $.ajax({
+    $.ajax({ //=====This is to fetch name and username from DB and display it at the app Drawer title======
         url : '/userINFO',
         type : 'POST',
         data : {
