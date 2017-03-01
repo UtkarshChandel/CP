@@ -31,6 +31,30 @@ $(document).ready(function(){
 
     });
 
+      $.ajax({
+        url : '/isTeach',
+        type : 'POST',
+        data : {
+          email : window.email
+        },
+        success : function(response){
+          if (response == "isTeacher") {
+            $('.demo-layout-transparent .mdl-layout__drawer-button').css({
+              "color":"#0275d8"
+            });
+            $('.mdl-layout-title').css({
+              "color":"#0275d8"
+            });
+
+          }
+        }
+
+
+
+
+
+      });
+
 
 
 

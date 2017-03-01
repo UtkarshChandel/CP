@@ -36,13 +36,16 @@ var UserSchema = new mongoose.Schema({
   enrollmentno : {
     type : Number,
 
+  },
+  isteacher : {
+    type : Boolean
   }
 
 });
 
 UserSchema.statics.findWhetherEnrollment = function(enrollmentno,rollno,email){
   var User = this;
-  
+
 //  console.log(email);
 //  console.log("inside mongo whether");
     return User.findOne({$or:[{enrollmentno},{rollno},{email}]}).then((user)=>{

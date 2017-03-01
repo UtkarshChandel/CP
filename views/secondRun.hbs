@@ -57,6 +57,10 @@
                           form.submit();
                       }
 
+                      function SignOut(){
+                        firebase.auth().signOut();
+
+                      }
 
 
                       function initApp(){
@@ -91,14 +95,14 @@
 
 
 
-                      //document.getElementById('signoutBTN').addEventListener('click',toggleSignIn,false);
+                      document.getElementById('Signoutthirddr').addEventListener('click',SignOut,false);
                       window.clck = 0
 
 
                       }
                       window.onload = function() {
                       initApp();
-                      //$('#loader').hide();
+                      
                       };
 
 
@@ -132,14 +136,14 @@
 
         </div>
       </header>
-      <div class="mdl-layout__drawer">
+      <div id="Drawerdd"class="mdl-layout__drawer">
         <span class="mdl-layout-title" id="titleofdrawer"></span>
         <label id="emaillabelUNDER"></label>
-        <nav class="mdl-navigation">
-          <a class="mdl-navigation__link" href="">Link</a>
-          <a class="mdl-navigation__link" href="">Link</a>
-          <a class="mdl-navigation__link" href="">Link</a>
-          <a class="mdl-navigation__link" href="">Link</a>
+        <nav id="DrawBTN"class="mdl-navigation">
+          <a id="firstdr"class="mdl-navigation__link">Chatrooms</a>
+          <a id="seconddr"class="mdl-navigation__link">Feedback-Forms</a>
+          <a id="Signoutthirddr"class="mdl-navigation__link">Sign-Out</a>
+
         </nav>
       </div>
       <main class="mdl-layout__content">
