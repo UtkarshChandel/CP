@@ -14,7 +14,7 @@ var admin = require('firebase-admin');
 var app = express();
 var server = http.createServer(app);
 var io = socketIO(server);
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 80;
 var dotenv = require('dotenv');
 dotenv.load();
 
