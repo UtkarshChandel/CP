@@ -52,7 +52,7 @@ app.use(express.static(__dirname +'./../public'));
 app.set('view engine',hbs);
 //===========================================================================//
 
-app.post('/profile',(req,res)=>{
+app.post('/profile',(req,res)=>{//==========Request is made by index.js======
 
 
   var accessToken = req.body.token
@@ -67,7 +67,7 @@ app.post('/profile',(req,res)=>{
       var mailid = decodedToken.email;
       var isVerified = decodedToken.email_verified;
       global.c = mailid;
-      //console.log('mail id idhar hai jo send ho rha hai!!')
+      //console.log('mail id idhar hai')
       console.log(mailid);
 
       if (isVerified) {
@@ -101,7 +101,7 @@ app.post('/profile',(req,res)=>{
 
 });
 
-app.post('/personal',(req,res)=>{
+app.post('/personal',(req,res)=>{//====Request is made by profile.hbs to store user data=====
   var recvdata = req.body;
   console.log(recvdata);
   var user = new User(recvdata);
@@ -118,14 +118,19 @@ app.post('/personal',(req,res)=>{
 });
 
 app.post('/check',(req,res)=>{
+  //==Request is made by checkChange.js to maintain spam data entries of already existing====
+  //==Request is also made to check whether the rollno already exists===========
+  //==Request is also made to check enrollment number in real time=====
   var body = _.pick(req.body,['enrollmentno','rollno','email','kkr']);
   console.log("CHECKPOINT BODY RECVD");
   console.log(body.email);
+  console.log("Email rcvd to chck whether this already exists");
   console.log(body);
   //var body2roll = _.pick(req.body,['rollno'])
 //body.enrollmentno,
     User.findWhetherEnrollment(body.enrollmentno,body.rollno,body.email).then((user)=>{
       console.log("user exists ");
+      console.log("Sending already exists to check change");
       res.send("alreadyexists");
   }).catch((e)=>{
       res.send("allgood");
@@ -134,7 +139,7 @@ app.post('/check',(req,res)=>{
 
 });
 
-app.post('/userINFO',(req,res)=>{
+app.post('/userINFO',(req,res)=>{//Request is made by getuserInfo to fetch name and username from DB
   var reqBody = _.pick(req.body,['reqMail']);
   console.log("CHECKPOINT BODY RECVD");
   console.log(reqBody.reqMail);
@@ -149,6 +154,8 @@ app.post('/userINFO',(req,res)=>{
 });
 
 app.post('/isTeach',(req,res)=>{
+  //Request is made by checkChange to change the Complete your profile layout (profile.hbs) to collapse rollno. for teacher
+  //Request is made by getuserInfo to check isTeacher @user and to change its layout acc.
   var body = _.pick(req.body,['email'])
   console.log('Teacher !!chck point!!');
   console.log(body.email);

@@ -28,7 +28,7 @@
     </head>
     <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
     <script src="js/libs/jquery-3.1.0.min.js"></script>
-    <script src="js/checkChange.js"></script>
+
 
 
               <script>
@@ -70,8 +70,13 @@
 
 
           function Submission(){
+            $( "#TocorrectRoll" ).trigger( "click" );
+            setTimeout(function(){
+
+
+
             if (document.getElementById('nameid').value != "" && document.getElementById('courseid').value != "" &&
-                document.getElementById('rollnoid').value != "" && document.getElementById('enrollmentid').value != "" &&
+                document.getElementById('rollnoid').value != "" && document.getElementById('rollnoid').value != null && document.getElementById('enrollmentid').value != "" &&
                 $('input[name=options]:checked').val() == "1" || $('input[name=options]:checked').val() == "2" ){
                      if ($('input[name=options]:checked').val() == "1") {
                           var gender = 'M';
@@ -95,7 +100,7 @@
             }
 
 
-
+  },2000);
           }//User[Student]submission End
           function TeacherSubmission(){
             if (document.getElementById('nameid').value != "" && document.getElementById('courseid').value != "" &&
@@ -201,7 +206,7 @@
 //document.getElementById('signoutBTN').addEventListener('click',toggleSignIn,false);
 window.clck = 0;
 document.getElementById('clcko').addEventListener('click',Bewagoof,false);
-// document.getElementById('profilesubBTN').addEventListener('click',Submission,false); ===else condition
+document.getElementById('profilesubBTN').addEventListener('click',Submission,false);// ===else condition
 
   }
   window.onload = function() {
@@ -250,7 +255,8 @@ document.getElementById('clcko').addEventListener('click',Bewagoof,false);
                         <label id="enrollLabel">Enrollment Number</label>
                       </div>
                       <div class="mui-textfield mui-textfield--float-label">
-                        <input  id="rollnoid"type="number" value="" required>
+                        <input  id="rollnoid"type="number" value="" min="1" max="79" required>
+
                         <label id="rollnoLabel">Roll No.</label>
                       </div>
                       <input type="button"  value="Submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="profilesubBTN" />
@@ -261,12 +267,19 @@ document.getElementById('clcko').addEventListener('click',Bewagoof,false);
 
 
           </div> <!-- /container -->
+          <div id="TocorrectRoll"></div>
+          <script>
+          $( "#TocorrectRoll" ).on( "click", function() {
+            console.log("==!!!!!!!!!!!!!!!!!!!!=hidden Clck==!!!!!!!!!!!!!!!!!!!!!!!!!!!!!=");
+            });
+          </script>
 
 
 
             <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
             <script src="js/index.js"></script>
+              <script src="js/checkChange.js"></script>
 
 
 

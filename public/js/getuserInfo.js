@@ -31,7 +31,7 @@ $(document).ready(function(){
 
     });
 
-      $.ajax({
+      $.ajax({//to change layout according to user here Teacher
         url : '/isTeach',
         type : 'POST',
         data : {

@@ -30,8 +30,10 @@ var UserSchema = new mongoose.Schema({
     },
   rollno : {
     type : Number,
-    min : 1,
-    max : 79
+    default : 890,
+    unique : false,
+
+    
   },
   enrollmentno : {
     type : Number,
@@ -45,16 +47,25 @@ var UserSchema = new mongoose.Schema({
 
 UserSchema.statics.findWhetherEnrollment = function(enrollmentno,rollno,email){
   var User = this;
+console.log("inside mongo whether");
+  console.log(email);
+  console.log(enrollmentno);
+  console.log(rollno);
 
-//  console.log(email);
-//  console.log("inside mongo whether");
     return User.findOne({$or:[{enrollmentno},{rollno},{email}]}).then((user)=>{
+
       if(!user){
+
         console.log("No such with provided criteria exists -DB");
         return Promise.reject();
       }
+      else if (user) {
+        console.log(user);
+        return user;
 
-      return user;
+      }
+
+
 
     })
 }

@@ -33,6 +33,7 @@ $(document).ready(function(){
 
 
         }else {
+          console.log("Student");
           document.getElementById('profilesubBTN').addEventListener('click',Submission,false);
 
         }
@@ -63,69 +64,83 @@ $(document).ready(function(){
   });
 
 
+  $('#rollnoid').change(function(){
+  
+    if (document.getElementById('rollnoid').value >= 80 ) {
+      console.log('checking greater');
+      $('#rollnoid').val('');
+      document.getElementById('err').innerHTML = 'Last Roll No. is 79';
+      $('.error').fadeIn(400).delay(3000).fadeOut(400);
 
-
-});
-
-
-
-    $('#rollnoid').change(function(){
-      console.log('roll going');
-
-        $.ajax({
-          url : '/check',
-          type : 'POST',
-
-          data : {
-            rollno : document.getElementById('rollnoid').value
-
-
-          },
-          success : function(response){
-
-            if (response == "alreadyexists") {
-                document.getElementById('err').innerHTML = 'Sorry User already Exists';
-                $('.error').fadeIn(400).delay(3000).fadeOut(400);
-                $('#rollnoid').val('');
-
-          }
-
-        }
-
-    });
-  });
-
-
-
-
-
-
-    $('#enrollmentid').keyup(function () {
-      console.log(document.getElementById('enrollmentid').value);
+    }
+    console.log('roll going');
 
       $.ajax({
         url : '/check',
         type : 'POST',
 
         data : {
-          enrollmentno : document.getElementById('enrollmentid').value
+          rollno : document.getElementById('rollnoid').value
+
+
         },
-        success : function(response) {
-        if (response == "alreadyexists") {
-            document.getElementById('err').innerHTML = 'Sorry User already Exists';
-            $('.error').fadeIn(400).delay(3000).fadeOut(400);
-            $('#enrollmentid').val('');
-            //console.log('passed removal')
-        }
+        success : function(response){
 
+          if (response == "alreadyexists") {
+              document.getElementById('err').innerHTML = 'Sorry User already Exists';
+              $('.error').fadeIn(400).delay(3000).fadeOut(400);
+              $('#rollnoid').val('');
 
         }
-      });
+
+      }
+
+  });
+});
 
 
 
 
-    });
+
+$('#enrollmentid').keyup(function () {
+  console.log(document.getElementById('enrollmentid').value);
+
+  $.ajax({
+    url : '/check',
+    type : 'POST',
+
+    data : {
+      enrollmentno : document.getElementById('enrollmentid').value
+    },
+    success : function(response) {
+    if (response == "alreadyexists") {
+        document.getElementById('err').innerHTML = 'Sorry User already Exists';
+        $('.error').fadeIn(400).delay(3000).fadeOut(400);
+        $('#enrollmentid').val('');
+        //console.log('passed removal')
+    }
+
+
+    }
+  });
+
+
+
+
+});
+
+
+
+});
+
+
+
+
+
+
+
+
+
 
 
 });

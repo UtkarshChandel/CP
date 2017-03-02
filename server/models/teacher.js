@@ -18,8 +18,9 @@ TeacherSchema.statics.findWheatherTeacher = function(email){
     if(!teacher){
       console.log("No teacher exist with this email!! ");
       return Promise.reject();
-    }
+    }else if (teacher) {
       return teacher;
+    }
   })
 
 
