@@ -33,10 +33,11 @@
     height:20px;
     border-radius: 25px;
     height:auto;
-    position:relative;
-    left:50%;
+    position:absolute;
+    left:45%;
     margin-left:-100px;
     top: 350px;
+
     background-color: #383838;
     color: #F0F0F0;
     font-family: 'VT323', monospace;
