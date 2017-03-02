@@ -17,6 +17,7 @@
 
 <!--  <link rel="stylesheet" href="/css/style.css"> --><!--Later-->
     <script defer src="/js/material.min.js"></script>
+    <link rel="stylesheet" href="/css/feedbackview.css">
 
 
   </head>
@@ -60,7 +61,13 @@
                       function SignOut(){
                         firebase.auth().signOut();
 
+                      }//SignOut END_
+
+
+                      function LetsGoFEED(){
+                        window.location = "/feedback"
                       }
+
 
 
                       function initApp(){
@@ -96,6 +103,7 @@
 
 
                       document.getElementById('Signoutthirddr').addEventListener('click',SignOut,false);
+                        document.getElementById('feedrrrr').addEventListener('click',LetsGoFEED,false);
                       window.clck = 0
 
 
@@ -141,7 +149,7 @@
         <label id="emaillabelUNDER"></label>
         <nav id="DrawBTN"class="mdl-navigation">
           <a id="firstdr"class="mdl-navigation__link">Chatrooms</a>
-          <a id="seconddr"class="mdl-navigation__link">Feedback-Forms</a>
+          <a id="feedrrrr"class="mdl-navigation__link">Feedback-Forms</a>
           <a id="Signoutthirddr"class="mdl-navigation__link">Sign-Out</a>
 
         </nav>
@@ -163,7 +171,7 @@
     <script src="js/signup.js"></script
     -->
     <script src="js/libs/jquery-3.1.0.min.js"></script>
-    
+
 
     <script src="js/getuserInfo.js"></script>
 

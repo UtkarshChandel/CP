@@ -173,6 +173,10 @@ app.post('/isTeach',(req,res)=>{
 
 });
 
+app.get('/feedback',(req,res)=>{
+  res.render('feedback.hbs');
+});
+
 
 
 
