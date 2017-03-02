@@ -9,6 +9,7 @@
 
     <link rel="stylesheet" href="/css/material.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|VT323" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Vollkorn:400,700" rel="stylesheet">
     <script defer src="/js/material.min.js"></script>
 
@@ -20,6 +21,85 @@
       <link rel="stylesheet" href="/css/feedbackview.css">
 
 
+<script>
+function post(path, params, method) {
+    method = method || "post";
+
+    var form = document.createElement("form");
+    form.setAttribute("method", method);
+    form.setAttribute("action", path);
+
+    for(var key in params) {
+        if(params.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", params[key]);
+
+            form.appendChild(hiddenField);
+         }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+}
+
+
+function SendReview(){
+    console.log('Sending Review');
+    if ($('#feedbackTextAreaID').val() != "" && document.getElementById('ScoreID').innerHTML != null &&
+      document.getElementById('ScoreID').innerHTML != "" ) {
+
+
+        $.ajax({
+
+          url : '/review',
+          type : 'POST',
+          data : {
+            review : $('#feedbackTextAreaID').val(),
+            score : document.getElementById('ScoreID').innerHTML
+
+          },
+          success : function(response){
+            if(response == "thanksSubmitted"){
+              document.getElementById('err').innerHTML = 'Your feedback has been Sent';
+              $('.error').fadeIn(400).delay(3000).fadeOut(400);
+                setTimeout(function(){
+                  window.location = "/";
+                },1000);
+
+
+
+            }else if (response == "noThankyou") {
+              document.getElementById('err').innerHTML = 'Something went Wrong..Please try again';
+              $('.error').fadeIn(400).delay(3000).fadeOut(400);
+
+
+            }
+          }
+
+        });
+
+    }else {
+      document.getElementById('err').innerHTML = 'Blank Feedback what a Metaphorical review!!';
+      $('.error').fadeIn(400).delay(3000).fadeOut(400);
+    }
+
+
+
+
+
+
+}
+
+
+
+window.onload = function() {
+  document.getElementById('SendReviewBTN').addEventListener('click',SendReview, false);
+
+
+};
+</script>
 
   </head>
 
@@ -35,8 +115,10 @@
   <div id="feedbackDivID"class="mdl-textfield mdl-js-textfield">
     <label id="feedbackTitle">We'd love to view your views</label>
     <textarea id="feedbackTextAreaID"class="mdl-textfield__input" type="text" row="10" ></textarea>
-    <label class="mdl-textfield__label" for="sample5">Feedback...</label>
+    <label class="mdl-textfield__label">Feedback...</label>
     <label id="ScoreID"></label>
+    <input type="button"  value="Send" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="SendReviewBTN" />
+    <div class='error' style='display:none' id="err"></div>
   </div>
 
 

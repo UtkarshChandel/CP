@@ -6,6 +6,7 @@ const socketIO = require('socket.io');
 const firebase = require('firebase');
 
 const {mongoose} = require('./db/mongoose');
+const {Review} = require('./models/review');
 const {Teacher} = require('./models/teacher')
 const {User} = require('./models/user');
 const hbs = require('hbs');
@@ -175,6 +176,17 @@ app.post('/isTeach',(req,res)=>{
 
 app.get('/feedback',(req,res)=>{
   res.render('feedback.hbs');
+});
+
+app.post('/review',(req,res)=>{
+  var body = _.pick(req.body,['review','score'])
+  console.log("Sending Score to DB "+ body.score);
+  var review = new Review(body);
+  review.save().then(()=>{
+    res.send('thanksSubmitted')
+  }).catch((e)=>{
+    res.send('noThankyou')
+  })
 });
 
 

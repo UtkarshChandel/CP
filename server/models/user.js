@@ -9,7 +9,7 @@ var UserSchema = new mongoose.Schema({
     type : String,
     required : true,
     trim : true,
-    minlength : 3,
+    minlength : 3
 
   },
   gender : {
@@ -33,7 +33,7 @@ var UserSchema = new mongoose.Schema({
     default : 890,
     unique : false,
 
-    
+
   },
   enrollmentno : {
     type : Number,
