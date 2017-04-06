@@ -226,17 +226,21 @@ function toggleSignIn() {
                           console.log("veri sent");
                           document.getElementById('err').innerHTML = "Email Verification Sent!!";
                           $('.error').fadeIn(400).delay(3000).fadeOut(400);
-                          toggleSignIn();
+                          Signoutcause();
 
                     });
 
                   },function (error){
-                    toggleSignIn();
+                    Signoutcause();
                     console.log(error);
                   });
 
 
                 }//handleSignin END
+
+                function Signoutcause(){
+                  firebase.auth().signOut();
+                }
 
                   function sendPasswordReset(){
                       var email = document.getElementById('inputEmail').value;
@@ -312,7 +316,7 @@ window.onload = function() {
     };
 </script>
 
-<!--===================================\_()_/================================================-->
+<!--===================================\\__()__//================================================-->
   <body>
 
       <div class="container" id="particles-js">

@@ -15,7 +15,7 @@ var admin = require('firebase-admin');
 var app = express();
 var server = http.createServer(app);
 var io = socketIO(server);
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 3000;
 var dotenv = require('dotenv');
 dotenv.load();
 
@@ -189,6 +189,10 @@ app.post('/review',(req,res)=>{
   })
 });
 
+app.get('/chatroom',(req,res)=>{
+  res.render('chatroom.hbs');
+});
+
 
 
 
@@ -199,6 +203,12 @@ io.on('connection',(socket)=>{
 
   }
   console.log(`${global.c}  connected`);
+
+  socket.emit('newEmail',{
+    from : 'mike@mike.com',
+    text : 'whaddup'
+
+  });
 });
 
 
