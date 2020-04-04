@@ -26,7 +26,7 @@
     "list.js": "^1.5.0",
     "lodash": "^4.15.0",
     "mongodb": "^2.2.5",
-    "mongoose": "^4.5.9",
+    "mongoose": "^5.9.7",
     "sendgrid": "^4.7.1",
     "socket.io": "^1.7.2",
     "synchronize": "^2.0.0",
